@@ -1,0 +1,30 @@
+
+<%= form_with(model: @task, local: true) do |f| %>
+
+<div class="form-group">
+  <%= f.label :date, '日付', class:'control-label' %>
+  <%= f.date_select :date, {}, class: '' %>
+</div>
+
+<div class="form-group">
+<%= f.label :judgmente, '判定', class:'control-label' %>
+<%= f.select :judgmente, ["○","×"], class: 'form-control' %>
+</div>
+
+<div class="form-group">
+<%= f.label :playback, '再生', class:'control-label' %>
+<%= f.select :playback, ["×","○"], class: 'form-control' %>
+</div>
+
+<div class="form-group">
+  <%= f.label :meter, '軟水メータ(L)' %>
+  <%= f.text_field :meter %>
+</div>
+
+<div class="form-group">
+  <%= f.label :explanation, '本文' %>
+  <%= f.text_area :explanation, class: 'form-control', rows: 10 %>
+</div>
+<br>
+  <%= f.submit '投稿', class: 'btn btn-primary' %>
+<% end %>

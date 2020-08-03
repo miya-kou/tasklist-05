@@ -1,0 +1,7 @@
+<% if task %>
+  <h2><%= task.date.to_s(:date_jp) %>　軟水チェックシート</h2><br>
+<% else %>
+<div class=centering_parent >
+  <h3>※この月のデータはありません。</h3>
+</div>
+<% end %>

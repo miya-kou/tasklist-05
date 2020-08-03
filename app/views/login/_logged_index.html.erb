@@ -1,0 +1,96 @@
+<% if logged_in? %>
+  <%= link_to '新規投稿', new_task_path, class: "btn btn-primary" %>
+<% end %>
+<div class="softwater">
+  <br>
+  (110,000L前後で再生必要)
+    <h6>
+    <%= link_to '前月',root_path(month: @last_month) %>
+    <%= link_to '来月',root_path(month: @next_month) %>
+    の記録はこちらから
+    </h6>
+</div>
+<table class="table table-bordered thead-dark">
+ <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">前回再生時</th>
+      <th scope="col">次回予測</th>
+    </tr>
+  </thead>
+  <p> 
+  </p>
+  <% if task %>
+  <tbody>
+       <td>
+        <% if task == nil %>
+        <%= 0 %>
+        <%else%>
+        <%= task %>
+        <% end %>
+      </td>
+      <td>
+        <% if task == nil %>
+        <%= 0 %>
+        <%else%>
+        <%= task+110000 %>
+        <% end %>
+      </td>
+  </tbody>
+  <% end %>
+</table>
+  <div>
+    <% if task %>
+      <% next_playback_meter = task+110000 %> 
+      <% last_meter = task_meter.last.meter %> 
+      <% if next_playback_meter-last_meter<=10000 %>
+        <div class="flame03">
+          <%= "次回予測の再生値まで残り10000(L)を切りました。早めの再生をお願いします。" %>
+        </div>
+      <% else %>
+        <div class="flame02">
+          <%= "硬度指示薬を用いて軟水チェックを行い、流量計メータ積算値を記入しましょう。" %>
+        </div>
+        <% end %>
+    <% end %>
+  </div>
+<table class="table table-bordered thead-dark">
+ <table class="table table-bordered">
+  <thead class="thead-dark">
+  <p></p>
+    <tr>
+      <th scope="col">日付</th>
+      <th scope="col">点検者</th>
+      <th scope="col">判定</th>
+      <th scope="col">軟水メータ(L)</th>
+      <th scope="col">使用量(L)</th>
+      <th scope="col">再生</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% tasks.each_with_index do |task, idx| %>
+    <tr>
+      <td><%= link_to task.date.to_s(:datetime_jp), task %></td>
+      <td><%= task.user.name %></td>
+      <td><%= task.judgmente %></td>
+      <td><%= task.meter %></td>
+      <td>
+        <% if idx == 0 %>
+          <%= task.meter - task_month %>
+        <% else %>
+          <%= task.meter - tasks[idx-1].meter %>
+        <% end %>
+      </td>
+      <td><%= task.playback %></td>
+    </tr>
+  <%  end %>
+  </tbody>
+</table>
+<u><h5>硬度チェックと再生方法は<a href= "/indexfinish" >手順書</a>に従って実施する</h5></u><br>
+<ul>
+  <li>1日1回AM:09:00硬度指示薬を用いて軟水チェックを行い、流量計メータ積算値を記入する。<br>
+  （担当は１週間交代とする。)</li>
+  <li>測定者は、判定結果(○or×)と名前を判定欄に記入。</li>
+  <li>硬度リーク発生を確認したら速やかに再生を行う事とする。</li>
+  <li>再生したら再生欄に記入し、次回分の塩があるかどうかを確認する。</li>
+</ul>

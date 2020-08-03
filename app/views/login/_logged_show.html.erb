@@ -1,0 +1,34 @@
+<% if logged_in? %>
+<%= link_to 'このメッセージを編集する', edit_task_path(@task), class: 'btn btn-light' %>
+<%= link_to 'このメッセージを削除する', @task, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
+<% end %>
+<table class="table table-bordered">
+</br>　
+  <tr>
+    <th>名前</th>
+    <td><%= @task.user.name %></td>
+  </tr>
+  <tr>
+    <th>日付</th>
+    <td><%= @task.date.to_s(:datetime_jp) %></td>
+  </tr>
+  <tr>
+    <th>判定</th>
+    <td><%= @task.judgmente %></td>
+  </tr>
+    <tr>
+    <th>軟水メーター</th>
+    <td><%= @task.meter %></td>
+  </tr>
+    <tr>
+    <th>再生</th>
+    <td><%= @task.playback %></td>
+  </tr>
+</table>
+
+<table class="table table-bordered">
+  <th>詳細</th>
+  <tr>
+    <td><%= @task.explanation %></td>
+  </tr>
+</table>
