@@ -3,7 +3,7 @@
 <% end %>
 <div class="softwater">
   <br>
-  (110,000L前後で再生必要)
+  (10,000L前後で再生必要)
     <h6>
     <%= link_to '前月',root_path(month: @last_month) %>
     <%= link_to '来月',root_path(month: @next_month) %>
@@ -33,7 +33,7 @@
         <% if task == nil %>
         <%= 0 %>
         <%else%>
-        <%= task+110000 %>
+        <%= task+10000 %>
         <% end %>
       </td>
   </tbody>
@@ -41,11 +41,11 @@
 </table>
   <div>
     <% if task %>
-      <% next_playback_meter = task+110000 %> 
+      <% next_playback_meter = task+10000 %> 
       <% last_meter = task_meter.last.meter %> 
-      <% if next_playback_meter-last_meter<=10000 %>
+      <% if next_playback_meter-last_meter<=1000 %>
         <div class="flame03">
-          <%= "次回予測の再生値まで残り10000(L)を切りました。早めの再生をお願いします。" %>
+          <%= "次回予測の再生値まで残り1000(L)を切りました。早めの再生をお願いします。" %>
         </div>
       <% else %>
         <div class="flame02">
